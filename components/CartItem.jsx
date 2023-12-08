@@ -3,6 +3,7 @@ import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { updateCart, removeFromCart } from "@/store/cartSlice";
 import { useDispatch } from "react-redux";
+
 const CartItem = ({ data }) => {
   const p = data.attributes;
 
@@ -60,19 +61,13 @@ const CartItem = ({ data }) => {
               <select
                 className="hover:text-black"
                 onChange={(e) => updateCartItem(e, "selectedSize")}
+                value={data.selectedSize}
               >
-                {p.size.data.map((item, i) => {
-                  return (
-                    <option
-                      key={i}
-                      value={item.size}
-                      disabled={!item.enabled ? true : false}
-                      selected={data.selectedSize === item.size}
-                    >
-                      {item.size}
-                    </option>
-                  );
-                })}
+                {p.size.data.map((item, i) => (
+                  <option key={i} value={item.size} disabled={!item.enabled}>
+                    {item.size}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -81,14 +76,13 @@ const CartItem = ({ data }) => {
               <select
                 className="hover:text-black"
                 onChange={(e) => updateCartItem(e, "quantity")}
+                value={data.quantity}
               >
-                {Array.from({ length: 10 }, (_, i) => i + 1).map((q, i) => {
-                  return (
-                    <option key={i} value={q} selected={data.quantity === q}>
-                      {q}
-                    </option>
-                  );
-                })}
+                {Array.from({ length: 10 }, (_, i) => i + 1).map((q, i) => (
+                  <option key={i} value={q}>
+                    {q}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

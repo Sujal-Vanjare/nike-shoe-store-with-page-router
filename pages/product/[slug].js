@@ -18,6 +18,13 @@ const ProductDetails = ({ product, products }) => {
   const dispatch = useDispatch();
   const p = product?.data?.[0]?.attributes;
 
+  const markdownDescription = p.description
+    .map((paragraph) => {
+      const text = paragraph.children.map((child) => child.text).join("");
+      return `${text}\n\n`; // Add newlines between paragraphs
+    })
+    .join("");
+
   const notify = () => {
     toast.success("Success. Check your cart!", {
       position: "bottom-right",
@@ -155,7 +162,7 @@ const ProductDetails = ({ product, products }) => {
             <div>
               <div className="text-lg font-bold mb-5">Product Details</div>
               <div className="markdown text-md mb-5">
-                <ReactMarkdown>{p.description}</ReactMarkdown>
+                <ReactMarkdown>{markdownDescription}</ReactMarkdown>
               </div>
             </div>
           </div>
