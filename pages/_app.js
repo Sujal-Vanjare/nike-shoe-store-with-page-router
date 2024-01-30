@@ -24,8 +24,10 @@ export default function App({ Component, pageProps }) {
       </Head>
       <Provider store={store}>
         <Header />
-        <Component {...pageProps} />
-        <Footer />
+        <div className="h-[calc(100vh-80px)] flex flex-col justify-between">
+          <Component {...pageProps} />
+          <Footer />
+        </div>
       </Provider>
     </>
   );
